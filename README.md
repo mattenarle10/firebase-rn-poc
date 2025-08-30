@@ -42,33 +42,27 @@ To learn more about developing your project with Expo, look at the following res
 - [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Firebase Setup — Phase 1
+## Firebase RN POC — Pragmatic Checklist
 
-1. __Create project & app__
-    - In Firebase Console: create a project.
-    - Add a Web app to get config values (apiKey, authDomain, etc.).
-    - Simple: we just need these keys; no product enabled yet.
+- [ ] Create Firebase project and add a Web app (to get config keys)
+- [ ] Copy `.env.example` to `.env` and paste your keys into `EXPO_PUBLIC_FIREBASE_*`
+- [ ] Install deps: `npm install` (Firebase SDK already added)
+- [ ] Start the app: `npx expo start` (restart after editing `.env`)
 
-2. __Add your env vars__
-    - Copy `.env.example` to `.env`.
-    - Paste the values from Firebase into the `EXPO_PUBLIC_FIREBASE_*` fields.
-    - Why: EXPO_PUBLIC_* is auto-exposed to the app (no extra loader needed).
+Quick refs
+- __Config__: `src/lib/firebase-config.ts`
+- __Init import__: `app/_layout.tsx`
+- __Env file__: `.env` (do not commit secrets)
 
-3. __Install Firebase SDK__
-    - Run: `npm install firebase`
-    - Why: gives us `initializeApp()` and friends.
+Next (optional)
+- [ ] Enable Email/Password in Firebase Authentication
+- [ ] Add simple sign up / sign in screens (uses `firebase/auth`)
+- [ ] Enable Google provider if needed
 
-4. __App initialization (already wired)__
-    - Config lives in `src/lib/firebase-config.ts`.
-    - It's imported once in `app/_layout.tsx`, so Firebase initializes on app start.
-    - No UI changes yet—this only connects the app to your Firebase project.
-
-5. __Run the app__
-    - `npx expo start` (restart if you change `.env`).
-
-### Troubleshooting
-- If env values seem undefined, fully restart the dev server after editing `.env`.
-- `app.json` uses scheme `firebasernpoc`—no extra linking needed for basic Firebase.
+Troubleshooting
+- If env vars are undefined, fully restart the dev server.
+- `measurementId` is optional (web only).
+- `app.json` scheme `firebasernpoc` is fine for this POC.
 
 ## Join the community
 
