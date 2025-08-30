@@ -25,39 +25,27 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
 
-When you're ready, run:
+## Firebase RN POC 
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Firebase RN POC — Pragmatic Checklist
-
-- [ ] Create Firebase project and add a Web app (to get config keys)
-- [ ] Copy `.env.example` to `.env` and paste your keys into `EXPO_PUBLIC_FIREBASE_*`
-- [ ] Install deps: `npm install` (Firebase SDK already added)
-- [ ] Start the app: `npx expo start` (restart after editing `.env`)
+- [ ] Make a Firebase project + add a Web app (this gives you the keys)
+- [ ] Copy `.env.example` → `.env` and paste into `EXPO_PUBLIC_FIREBASE_*`
+- [ ] Install deps: `npm install` (we already added Firebase SDK)
+- [ ] Run it: `npx expo start` (restart after editing `.env`)
 
 Quick refs
 - __Config__: `src/lib/firebase-config.ts`
 - __Init import__: `app/_layout.tsx`
 - __Env file__: `.env` (do not commit secrets)
 
-Next (optional)
+Next (optional, pick what you like ✨)
 - [ ] Enable Email/Password in Firebase Authentication
 - [ ] Add simple sign up / sign in screens (uses `firebase/auth`)
 - [ ] Enable Google provider if needed
+- [ ] Enable Facebook provider (cute bonus!)
+  - Make a Facebook app at developers.facebook.com
+  - Copy App ID + Secret into Firebase > Authentication > Sign-in method > Facebook
+  - Save. Done for config. We can wire the OAuth flow later 💙
 
 Troubleshooting
 - If env vars are undefined, fully restart the dev server.
