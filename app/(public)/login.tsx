@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, ActivityIndicator, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from '@/src/lib/nativewind';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/src/hooks/useAuth';
 import { getSignInMethods } from '@/src/services/auth';
@@ -98,14 +99,14 @@ export default function LoginScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.formContainer}>
-        <Text style={styles.title}>Welcome</Text>
+    <View className="flex-1 p-5 justify-between">
+      <View className="mt-10">
+        <Text className="text-2xl font-bold mb-6">Welcome</Text>
         
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Email</Text>
+        <View className="mb-4">
+          <Text className="text-base font-medium mb-2">Email</Text>
           <TextInput
-            style={styles.input}
+            className="border border-gray-300 rounded-lg p-3 text-base"
             placeholder="your@email.com"
             value={email}
             onChangeText={setEmail}
@@ -113,131 +114,58 @@ export default function LoginScreen() {
             keyboardType="email-address"
             editable={!showPassword}
           />
-          {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+          {emailError ? <Text className="text-red-500 text-xs mt-1">{emailError}</Text> : null}
         </View>
 
         {showPassword && (
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>
+          <View className="mb-4">
+            <Text className="text-base font-medium mb-2">
               {isExistingAccount ? 'Password' : 'Create password'}
             </Text>
             <TextInput
-              style={styles.input}
+              className="border border-gray-300 rounded-lg p-3 text-base"
               placeholder={isExistingAccount ? '••••••••' : 'Min 6 characters'}
               value={password}
               onChangeText={setPassword}
               secureTextEntry
             />
-            {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
+            {passwordError ? <Text className="text-red-500 text-xs mt-1">{passwordError}</Text> : null}
           </View>
         )}
 
         {loading ? (
-          <ActivityIndicator style={styles.button} />
+          <ActivityIndicator className="mt-2 p-3.5" color="#007AFF" />
         ) : (
           <TouchableOpacity 
-            style={styles.button}
+            className="bg-blue-500 rounded-lg p-3.5 items-center mt-2"
             onPress={showPassword ? handleSubmit : handleContinue}
           >
-            <Text style={styles.buttonText}>
+            <Text className="text-white text-base font-semibold">
               {showPassword ? (isExistingAccount ? 'Sign in' : 'Sign up') : 'Continue'}
             </Text>
           </TouchableOpacity>
         )}
       </View>
 
-      <View style={styles.socialContainer}>
-        <Text style={styles.dividerText}>or</Text>
+      <View className="mb-8">
+        <Text className="text-center text-gray-500 my-5">or</Text>
         
         <TouchableOpacity 
-          style={[styles.socialButton, styles.googleButton]}
+          className="bg-[#4285F4] rounded-lg p-3.5 items-center mb-3"
           onPress={handleGoogleSignIn}
           disabled={loading}
         >
-          <Text style={styles.socialButtonText}>Continue with Google</Text>
+          <Text className="text-white text-base font-medium">Continue with Google</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
-          style={[styles.socialButton, styles.facebookButton]}
+          className="bg-[#3b5998] rounded-lg p-3.5 items-center mb-3"
           onPress={handleFacebookSignIn}
           disabled={loading}
         >
-          <Text style={styles.socialButtonText}>Continue with Facebook</Text>
+          <Text className="text-white text-base font-medium">Continue with Facebook</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'space-between',
-  },
-  formContainer: {
-    marginTop: 40,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 24,
-  },
-  inputContainer: {
-    marginBottom: 16,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
-    fontWeight: '500',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-  },
-  errorText: {
-    color: 'red',
-    fontSize: 12,
-    marginTop: 4,
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    borderRadius: 8,
-    padding: 14,
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  socialContainer: {
-    marginBottom: 30,
-  },
-  dividerText: {
-    textAlign: 'center',
-    marginVertical: 20,
-    color: '#666',
-  },
-  socialButton: {
-    borderRadius: 8,
-    padding: 14,
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  googleButton: {
-    backgroundColor: '#4285F4',
-  },
-  facebookButton: {
-    backgroundColor: '#3b5998',
-  },
-  socialButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-});
