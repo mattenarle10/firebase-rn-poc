@@ -7,6 +7,8 @@ import '@/src/config/firebase-config';
 
 
 import { AuthProvider } from '@/src/hooks/useAuth';
+import '@/src/config/firebase-auth';
+import '../global.css';
 
 export default function RootLayout() {
 
