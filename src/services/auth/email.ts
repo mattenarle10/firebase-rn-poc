@@ -10,14 +10,16 @@ import {
 } from 'firebase/auth';
 
 async function signUpWithEmail(email: string, password: string) {
-  const cred = await createUserWithEmailAndPassword(auth, email.trim(), password);
+  const norm = email.trim().toLowerCase();
+  const cred = await createUserWithEmailAndPassword(auth, norm, password);
   // fire and forget email verification (no need to block UI)
   try { await sendEmailVerification(cred.user); } catch {}
   return cred.user;
 }
 
 async function signInWithEmail(email: string, password: string) {
-  const cred = await signInWithEmailAndPassword(auth, email.trim(), password);
+  const norm = email.trim().toLowerCase();
+  const cred = await signInWithEmailAndPassword(auth, norm, password);
   return cred.user;
 }
 
@@ -26,7 +28,8 @@ async function signOutUser() {
 }
 
 async function getSignInMethods(email: string) {
-  return fetchSignInMethodsForEmail(auth, email.trim());
+  const norm = email.trim().toLowerCase();
+  return fetchSignInMethodsForEmail(auth, norm);
 }
 
 export { auth, onAuthStateChanged, signUpWithEmail, signInWithEmail, signOutUser, getSignInMethods };
