@@ -5,10 +5,11 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 import '@/src/config/firebase-config';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+
+import { AuthProvider } from '@/src/hooks/useAuth';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -19,12 +20,15 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+
+      <AuthProvider>
+        <Stack>
+          <Stack.Screen name="(public)" options={{ headerShown: false }} />
+          <Stack.Screen name="(app)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </AuthProvider>
+
   );
 }
