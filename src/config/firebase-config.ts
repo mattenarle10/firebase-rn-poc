@@ -1,9 +1,5 @@
 import { FirebaseApp, getApps, initializeApp } from 'firebase/app';
 
-// Minimal Firebase initialization using EXPO_PUBLIC_* env vars
-// Simple idea: read config from .env and initialize once.
-// You don't need to use anything yet—this just connects the app to your Firebase project.
-
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,

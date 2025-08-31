@@ -4,11 +4,15 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 import '@/src/config/firebase-config';
+import * as WebBrowser from 'expo-web-browser';
 
 
 import { AuthProvider } from '@/src/hooks/useAuth';
 import '@/src/config/firebase-auth';
 import '../global.css';
+
+// Ensure the OAuth redirect result is delivered back to the app
+WebBrowser.maybeCompleteAuthSession({ skipRedirectCheck: false });
 
 export default function RootLayout() {
 
