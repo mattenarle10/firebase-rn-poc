@@ -6,7 +6,7 @@ module.exports = function (api) {
       'nativewind/babel',
     ],
     plugins: [
-      'expo-router/babel',
+      // Removed expo-router/babel as it's now included in babel-preset-expo
       'react-native-reanimated/plugin',
     ],
   };
